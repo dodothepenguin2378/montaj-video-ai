@@ -122,7 +122,7 @@ ul.does li::marker { color: var(--accent); }
 .deck:focus-visible .deck-track { box-shadow: 0 0 0 2px var(--accent); }
 .deck-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 16px; overscroll-behavior-x: contain; }
 .deck-track::-webkit-scrollbar { display: none; }
-.slide { flex: 0 0 100%; scroll-snap-align: start; padding: 34px 36px 32px; border-radius: 16px; border: 1px solid var(--line);
+.slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; padding: 34px 36px 32px; border-radius: 16px; border: 1px solid var(--line);
   background: radial-gradient(120% 90% at 100% 0%, rgba(51, 244, 115, .09), transparent 55%), var(--card-2); display: flex; flex-direction: column; }
 .slide + .slide { margin-left: 0; }
 .kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; color: var(--muted); font: 700 13px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; }
@@ -179,6 +179,22 @@ th { color: var(--muted); font-size: 12.5px; text-transform: uppercase; letter-s
 tr:last-child td { border-bottom: 0; }
 td:first-child { font-weight: 800; white-space: nowrap; }
 td:last-child { color: var(--accent); font-weight: 700; }
+table.cmp td:last-child { color: var(--soft); font-weight: 400; }
+table.cmp td:first-child { color: var(--muted); font-weight: 700; }
+.src { margin: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: #0a0a0a; font: 500 12.8px/1.65 var(--mono); color: var(--soft); white-space: pre; overflow-x: auto; }
+.src .k { color: #8f8f8f; }
+.src b { color: var(--accent); font-weight: 700; }
+.src i { color: #6f9a7e; font-style: normal; }
+.code2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.code2 > div { min-width: 0; }
+.code-lbl { margin: 0 0 6px !important; font: 800 12px/1.3 var(--body) !important; color: var(--muted) !important; text-transform: uppercase; letter-spacing: .05em; }
+.code-lbl em { color: var(--accent); font-style: normal; }
+.slide code, .rules code { font: 500 .9em var(--mono); color: var(--accent); background: #0a0a0a; border: 1px solid var(--line); padding: 1px 5px; border-radius: 5px; }
+.flow.steps li { flex-basis: 140px; }
+.vs-col.bad { border-color: rgba(255, 92, 92, .35); background: rgba(255, 92, 92, .06); }
+.vs-col.bad span::before { background: #ff8a8a; }
+.vs-col span strong { color: var(--text); }
+.rules.after-vs { margin-top: 12px; }
 
 /* contents */
 .toc { position: sticky; top: 92px; align-self: start; max-height: calc(100vh - 110px); overflow-y: auto; padding: 40px 0 30px; scrollbar-width: thin; scrollbar-color: #333 transparent; }
@@ -204,7 +220,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
   .hero p.intro { font-size: 16.5px; }
   .slide { padding: 24px 20px 22px; }
   .visual { margin-top: 6px; }
-  .vs { grid-template-columns: 1fr; }
+  .vs, .code2 { grid-template-columns: 1fr; }
   .words { grid-template-columns: repeat(2, 1fr); }
   .prompt { padding: 16px 16px 14px; }
   .prompt .attach { padding-right: 0; min-height: 0; margin-bottom: 10px; }
@@ -238,7 +254,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
       
       <div class="deck" tabindex="0" aria-roledescription="carusel" aria-label="Cum funcționează">
         <div class="deck-track">
-        <article class="slide" aria-label="Slide 1 din 12">
+        <article class="slide" aria-label="Slide 1 din 17">
           <p class="kicker"><span>01</span>Unde lucrează Claude</p>
           <h3 class="slide-title">Claude Code lucrează pe calculatorul tău</h3>
           <p>Nu e chatul de pe claude.ai. Claude Code rulează local și citește filmarea direct de pe disc, deci clipul nu se urcă nicăieri. Îi dai calea fișierului sau îl atașezi, iar el lucrează cu programele instalate la tine.</p>
@@ -247,7 +263,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           <div class="vs-col on"><b>Claude Code</b><span>Citește și scrie fișierele tale</span><span>Rulează ffmpeg, Whisper, Python</span><span>Scrie proiecte CapCut, Premiere, DaVinci</span></div>
         </div></div>
         </article>
-        <article class="slide" aria-label="Slide 2 din 12">
+        <article class="slide" aria-label="Slide 2 din 17">
           <p class="kicker"><span>02</span>Cum „vede” un video</p>
           <h3 class="slide-title">Claude nu se uită la film ca tine</h3>
           <p>Scoate din filmare cadre (imagini) și sunetul, transcrie vocea cu timpul fiecărui cuvânt, apoi decide din imagini și text unde taie. La final verifică rezultatul tot așa: pe cadre și pe sunet.</p>
@@ -259,14 +275,14 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           <li class="on"><b>MP4 final</b><span>+ timeline editabil</span></li>
         </ol></div>
         </article>
-        <article class="slide" aria-label="Slide 3 din 12">
+        <article class="slide" aria-label="Slide 3 din 17">
           <p class="kicker"><span>03</span>Unealta 1</p>
           <h3 class="slide-title">Ce e ffmpeg</h3>
           <p>Un program gratuit, fără interfață, care face aproape orice cu video și sunet: taie, lipește, schimbă viteza, scoate cadre, aplică un LUT, aduce sunetul la nivelul potrivit. E motorul din spatele multor editoare. Comenzile nu le scrii tu, le scrie Claude.</p>
           <div class="visual"><div class="code"><code>ffmpeg -i filmare.mp4 -vf fps=5 cadre/%04d.jpg</code><small>Scoate 5 cadre pe secundă, ca Claude să „vadă” filmarea.</small></div>
         <div class="code"><code>ffmpeg -i filmare.mp4 -vn sunet.wav</code><small>Scoate sunetul, pentru transcriere.</small></div></div>
         </article>
-        <article class="slide" aria-label="Slide 4 din 12">
+        <article class="slide" aria-label="Slide 4 din 17">
           <p class="kicker"><span>04</span>Unealta 2</p>
           <h3 class="slide-title">Ce e Whisper</h3>
           <p>Un model de transcriere gratuit, de la OpenAI, care rulează tot pe calculatorul tău și știe română. Îți dă fiecare cuvânt cu momentul exact în care l-ai spus. Așa găsește Claude pauzele, „ăăă”-urile și frazele spuse de două ori. Versiunile noi de ffmpeg (8.0+) îl au deja încorporat.</p>
@@ -279,7 +295,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           <div><time>00:15,62</time><span>singur</span></div>
         </div></div>
         </article>
-        <article class="slide" aria-label="Slide 5 din 12">
+        <article class="slide" aria-label="Slide 5 din 17">
           <p class="kicker"><span>05</span>CapCut</p>
           <h3 class="slide-title">Cum ajunge montajul în CapCut</h3>
           <p>Claude nu deschide CapCut și nu apasă butoane. Scrie direct pe disc fișierele proiectului, în folderul în care CapCut își ține proiectele. Când pornești CapCut, proiectul e în listă, cu toate tăieturile editabile.</p>
@@ -289,7 +305,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
 │  └─ draft_meta_info.json
 └─ root_meta_info.json     <i>← lista de proiecte pe care o vezi în CapCut</i></pre></div>
         </article>
-        <article class="slide" aria-label="Slide 6 din 12">
+        <article class="slide" aria-label="Slide 6 din 17">
           <p class="kicker"><span>06</span>CapCut</p>
           <h3 class="slide-title">Regulile pentru CapCut</h3>
           
@@ -300,7 +316,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           <li><b>Un script care scrie proiectul,</b> ideal împachetat ca skill, ca să nu fie refăcut de fiecare dată.</li>
         </ul></div>
         </article>
-        <article class="slide" aria-label="Slide 7 din 12">
+        <article class="slide" aria-label="Slide 7 din 17">
           <p class="kicker"><span>07</span>Ce primești</p>
           <h3 class="slide-title">Rezultatul final și timeline-ul editabil</h3>
           <p>Rezultatul final îl face Claude Code: un MP4 tăiat exact pe cadre și verificat. Proiectul din CapCut e bonusul: aceleași tăieturi, ca să continui tu montajul. Efectele grele (VFX, color grading, reel) le face Claude cu ffmpeg și ajung în CapCut ca un clip pe pistă.</p>
@@ -309,7 +325,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           <div class="vs-col"><b>Timeline editabil</b><span>Proiect CapCut, XML pentru Premiere sau DaVinci</span><span>Îl continui tu, de mână</span></div>
         </div></div>
         </article>
-        <article class="slide" aria-label="Slide 8 din 12">
+        <article class="slide" aria-label="Slide 8 din 17">
           <p class="kicker"><span>08</span>Din experiență</p>
           <h3 class="slide-title">Ce am învățat pe drum</h3>
           
@@ -320,28 +336,103 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           <li><b>Înainte de orice generare pe Higgsfield,</b> cere-i lui Claude costul în credite.</li>
         </ul></div>
         </article>
-        <article class="slide" aria-label="Slide 9 din 12">
-          <p class="kicker"><span>09</span>Premiere Pro</p>
-          <h3 class="slide-title">Același proces în Premiere Pro</h3>
-          <p>Premiere importă timeline-uri din fișiere XML. Claude scrie un XML (formatul Final Cut Pro 7) cu pistele, tăieturile și markerii, iar tu îl deschizi cu <b>File → Import</b>. Apare o secvență nouă, editabilă. Premiere poate rămâne deschis.</p><p class="small">Avansat: Premiere se poate controla și prin scripturi (ExtendScript, UXP) sau prin servere MCP făcute de comunitate. Sunt neoficiale, așa că testează-le înainte.</p>
-          <div class="visual"><ol class="flow">
-          <li><b>Claude</b><span>scrie montaj.xml</span></li>
-          <li><b>File → Import</b><span>alegi fișierul</span></li>
-          <li class="on"><b>Secvența</b><span>apare în proiect</span></li>
+        <article class="slide" aria-label="Slide 9 din 17">
+          <p class="kicker"><span>09</span>Premiere și DaVinci</p>
+          <h3 class="slide-title">XML: timeline-ul scris ca text</h3>
+          <p>XML e un fișier text care descrie timeline-ul: ce clipuri sunt, din ce parte a filmării vine fiecare și unde stă pe timeline. Premiere și DaVinci îl citesc și refac din el secvența, editabilă.</p>
+          <div class="visual"><ol class="flow steps">
+          <li><b>1. Găsește tăieturile</b><span>ca la CapCut: ffmpeg scoate cadrele și sunetul, Whisper transcrie, Claude decide ce păstrează</span></li>
+          <li><b>2. Timpii devin cadre</b><span>la 30 fps, secunda 10 devine cadrul 300</span></li>
+          <li><b>3. Scrie fișierul XML</b><span>câte un clipitem pentru fiecare bucată păstrată</span></li>
+          <li class="on"><b>4. Tu îl imporți</b><span>în Premiere sau în DaVinci</span></li>
         </ol></div>
         </article>
-        <article class="slide" aria-label="Slide 10 din 12">
-          <p class="kicker"><span>10</span>DaVinci Resolve</p>
-          <h3 class="slide-title">Același proces în DaVinci Resolve</h3>
-          <p>Resolve importă timeline-uri în XML, FCPXML, EDL sau OTIO, din <b>File → Import → Timeline</b>. În plus are un API oficial în Python: Claude poate scrie un script care creează proiectul, importă clipurile, construiește timeline-ul și pornește randarea.</p><p class="small">Scripturile pornite din afara programului merg în Resolve Studio (plătit). În varianta gratuită le pornești din meniul Workspace → Scripts.</p>
-          <div class="visual"><ol class="flow">
-          <li><b>Claude</b><span>scrie XML sau un script Python</span></li>
-          <li><b>Import → Timeline</b><span>sau Workspace → Scripts</span></li>
-          <li class="on"><b>Timeline-ul</b><span>gata în Resolve</span></li>
-        </ol></div>
+        <article class="slide" aria-label="Slide 10 din 17">
+          <p class="kicker"><span>10</span>XML</p>
+          <h3 class="slide-title">O bucată din montaj, în XML</h3>
+          <p>Pentru fiecare bucată păstrată, Claude scrie un <code>clipitem</code>. Fișierul mai conține setările secvenței (fps, rezoluție), pistele video și audio și markerii. Markerii pot fi, de exemplu, „Potential B Cam” pe frazele unde vrei alt unghi.</p>
+          <div class="visual"><pre class="src"><span class="k">&lt;clipitem&gt;</span>
+  <span class="k">&lt;name&gt;</span>filmare.mp4<span class="k">&lt;/name&gt;</span>
+  <i>&lt;!-- unde stă pe timeline: cadrele 0–150 --&gt;</i>
+  <span class="k">&lt;start&gt;</span><b>0</b><span class="k">&lt;/start&gt;</span>  <span class="k">&lt;end&gt;</span><b>150</b><span class="k">&lt;/end&gt;</span>
+  <i>&lt;!-- ce parte din filmare: secundele 10–15 --&gt;</i>
+  <span class="k">&lt;in&gt;</span><b>300</b><span class="k">&lt;/in&gt;</span>  <span class="k">&lt;out&gt;</span><b>450</b><span class="k">&lt;/out&gt;</span>
+  <span class="k">&lt;file&gt;&lt;pathurl&gt;</span>file:///X:/filmari/filmare.mp4<span class="k">&lt;/pathurl&gt;&lt;/file&gt;</span>
+<span class="k">&lt;/clipitem&gt;</span></pre></div>
         </article>
-        <article class="slide" aria-label="Slide 11 din 12">
-          <p class="kicker"><span>11</span>Pe scurt</p>
+        <article class="slide" aria-label="Slide 11 din 17">
+          <p class="kicker"><span>11</span>XML</p>
+          <h3 class="slide-title">Cum îl deschizi</h3>
+          
+          <div class="visual"><div class="vs">
+          <div class="vs-col on"><b>Premiere Pro</b><span><strong>File → Import</strong></span><span>Apare o secvență nouă, cu toate tăieturile</span></div>
+          <div class="vs-col on"><b>DaVinci Resolve</b><span><strong>File → Import → Timeline</strong></span><span>Apare un timeline nou, cu toate tăieturile</span></div>
+        </div>
+        <ul class="rules after-vs">
+          <li><b>Programul leagă clipurile de filmarea originală</b> după calea din <code>pathurl</code>. Dacă ai mutat fișierul între timp, îl reconectezi cu Relink.</li>
+        </ul></div>
+        </article>
+        <article class="slide" aria-label="Slide 12 din 17">
+          <p class="kicker"><span>12</span>XML</p>
+          <h3 class="slide-title">Ce trece prin XML și ce nu</h3>
+          
+          <div class="visual"><div class="vs">
+          <div class="vs-col on"><b>Trece bine</b><span>Tăieturile</span><span>Pistele</span><span>Markerii</span><span>Viteza</span><span>Opacitatea de bază</span></div>
+          <div class="vs-col bad"><b>Trece prost sau deloc</b><span>Efectele</span><span>Color grading-ul</span><span>Tranzițiile complicate</span><span>Titlurile</span></div>
+        </div>
+        <p class="small">De aceea efectele grele (VFX, grading, reel) le face Claude cu ffmpeg, iar în timeline ajung ca un clip gata făcut.</p></div>
+        </article>
+        <article class="slide" aria-label="Slide 13 din 17">
+          <p class="kicker"><span>13</span>XML față de CapCut</p>
+          <h3 class="slide-title">Aceeași tăietură, în două formate</h3>
+          <p>Ambele spun același lucru: secundele 10–15 din filmare, puse la începutul timeline-ului. XML numără în cadre, CapCut în microsecunde.</p>
+          <div class="visual"><div class="code2">
+          <div><p class="code-lbl">XML · Premiere, DaVinci · <em>cadre</em></p>
+<pre class="src"><span class="k">&lt;clipitem&gt;</span>
+  <span class="k">&lt;start&gt;</span><b>0</b><span class="k">&lt;/start&gt;</span>
+  <span class="k">&lt;end&gt;</span><b>150</b><span class="k">&lt;/end&gt;</span>
+  <span class="k">&lt;in&gt;</span><b>300</b><span class="k">&lt;/in&gt;</span>
+  <span class="k">&lt;out&gt;</span><b>450</b><span class="k">&lt;/out&gt;</span>
+  <span class="k">&lt;pathurl&gt;</span>file:///X:/filmari/
+    filmare.mp4<span class="k">&lt;/pathurl&gt;</span>
+<span class="k">&lt;/clipitem&gt;</span></pre></div>
+          <div><p class="code-lbl">JSON · CapCut · <em>microsecunde</em></p>
+<pre class="src"><span class="k">"target_timerange"</span>: {
+  <span class="k">"start"</span>: <b>0</b>,
+  <span class="k">"duration"</span>: <b>5000000</b> },
+<span class="k">"source_timerange"</span>: {
+  <span class="k">"start"</span>: <b>10000000</b>,
+  <span class="k">"duration"</span>: <b>5000000</b> },
+<span class="k">"path"</span>: "X:/filmari/filmare.mp4"</pre></div>
+        </div></div>
+        </article>
+        <article class="slide" aria-label="Slide 14 din 17">
+          <p class="kicker"><span>14</span>XML față de CapCut</p>
+          <h3 class="slide-title">Față de JSON-ul CapCut</h3>
+          
+          <div class="visual"><div class="table"><table class="cmp">
+          <thead><tr><th></th><th>XML (Premiere, DaVinci)</th><th>JSON (CapCut)</th></tr></thead>
+          <tbody>
+            <tr><td>Ce este</td><td>Un format standard, făcut pentru schimb între programe</td><td>Formatul intern al proiectelor CapCut</td></tr>
+            <tr><td>Cum ajunge</td><td>Claude îți dă un fișier, iar tu îl imporți când vrei</td><td>Claude scrie direct în folderul de proiecte</td></tr>
+            <tr><td>Programul</td><td>Poate fi deschis</td><td>Trebuie închis</td></tr>
+            <tr><td>Timpii</td><td>În cadre</td><td>În microsecunde</td></tr>
+            <tr><td>La o actualizare</td><td>Rămâne stabil</td><td>Se poate strica</td></tr>
+          </tbody></table></div>
+        <p class="small">XML e un format standard, făcut pentru schimb între programe. De aceea e mai stabil și nu se strică la o actualizare.</p></div>
+        </article>
+        <article class="slide" aria-label="Slide 15 din 17">
+          <p class="kicker"><span>15</span>Avansat</p>
+          <h3 class="slide-title">Claude poate comanda și programul direct</h3>
+          
+          <div class="visual"><div class="vs">
+          <div class="vs-col"><b>Premiere Pro</b><span>Scripturi ExtendScript sau UXP, prin panouri și pluginuri</span><span>Servere MCP făcute de comunitate: neoficiale, testează-le înainte</span></div>
+          <div class="vs-col"><b>DaVinci Resolve</b><span>API oficial în Python: proiect, import, timeline, randare</span><span>Din afara programului merge în Resolve Studio; în varianta gratuită pornești scriptul din Workspace → Scripts</span></div>
+        </div>
+        <p class="small">Pentru lecție, XML-ul e suficient.</p></div>
+        </article>
+        <article class="slide" aria-label="Slide 16 din 17">
+          <p class="kicker"><span>16</span>Pe scurt</p>
           <h3 class="slide-title">CapCut, Premiere, DaVinci</h3>
           
           <div class="visual"><div class="table"><table>
@@ -353,8 +444,8 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
           </tbody></table></div>
         <p class="small">În toate trei, munca grea (tăieturi, sincronizare, efecte) o face Claude cu ffmpeg. Programul de montaj primește un timeline pe care îl continui tu.</p></div>
         </article>
-        <article class="slide" aria-label="Slide 12 din 12">
-          <p class="kicker"><span>12</span>Înainte să începi</p>
+        <article class="slide" aria-label="Slide 17 din 17">
+          <p class="kicker"><span>17</span>Înainte să începi</p>
           <h3 class="slide-title">Ce instalezi</h3>
           
           <div class="visual"><ul class="rules">
@@ -370,7 +461,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
         <div class="deck-nav">
           <button class="nav prev" type="button" aria-label="Slide-ul anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
           <div class="dots"></div>
-          <span class="count">01 / 12</span>
+          <span class="count">01 / 17</span>
           <button class="nav next" type="button" aria-label="Slide-ul următor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
       </div>
