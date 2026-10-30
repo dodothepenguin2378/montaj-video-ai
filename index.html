@@ -123,7 +123,7 @@ ul.does li::marker { color: var(--accent); }
 /* slides */
 .deck { position: relative; outline: none; }
 .deck:focus-visible .deck-track { box-shadow: 0 0 0 2px var(--accent); }
-.deck-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 16px; overscroll-behavior-x: contain; }
+.deck-track { display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden; transition: height .25s ease; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 16px; overscroll-behavior-x: contain; }
 .deck-track::-webkit-scrollbar { display: none; }
 .slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; padding: 34px 36px 32px; border-radius: 16px; border: 1px solid var(--line);
   background: radial-gradient(120% 90% at 100% 0%, rgba(51, 244, 115, .09), transparent 55%), var(--card-2); display: flex; flex-direction: column; }
@@ -134,7 +134,7 @@ ul.does li::marker { color: var(--accent); }
 .slide p { margin: 0 0 12px; color: var(--soft); font-size: 16.5px; }
 .slide p.small, p.small { font-size: 14.5px; color: var(--muted); }
 .slide p b { color: var(--text); }
-.visual { margin-top: auto; padding-top: 10px; }
+.visual { margin-top: 20px; }
 .visual p.small { margin: 10px 0 0; }
 .deck-nav { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
 .nav { width: 42px; height: 42px; border-radius: 50%; border: 1px solid #3a3a3a; background: transparent; color: var(--text); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, background .2s, opacity .2s; }
@@ -192,7 +192,7 @@ table.cmp td:first-child { color: var(--muted); font-weight: 700; }
 .code2 > div { min-width: 0; }
 .code-lbl { margin: 0 0 6px !important; font: 800 12px/1.3 var(--body) !important; color: var(--muted) !important; text-transform: uppercase; letter-spacing: .05em; }
 .code-lbl em { color: var(--accent); font-style: normal; }
-.slide code, .rules code { font: 500 .9em var(--mono); color: var(--accent); background: #0a0a0a; border: 1px solid var(--line); padding: 1px 5px; border-radius: 5px; }
+.slide p code, .rules code { font: 500 .9em var(--mono); color: var(--accent); background: #0a0a0a; border: 1px solid var(--line); padding: 1px 5px; border-radius: 5px; }
 .flow.steps li { flex-basis: 140px; }
 .vs-col.bad { border-color: rgba(255, 92, 92, .35); background: rgba(255, 92, 92, .06); }
 .vs-col.bad span::before { background: #ff8a8a; }
@@ -260,7 +260,7 @@ footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40p
   .hero { padding-top: 34px; }
   .hero p.intro { font-size: 16.5px; }
   .slide { padding: 24px 20px 22px; }
-  .visual { margin-top: 6px; }
+  .visual { margin-top: 14px; }
   .vs, .code2 { grid-template-columns: 1fr; }
   .fmt-head { display: none; }
   .fmt-row { grid-template-columns: 1fr; gap: 6px; }
@@ -1072,19 +1072,28 @@ document.querySelectorAll(".deck").forEach(deck => {
   });
   const cur = () => Math.round(track.scrollLeft / track.clientWidth);
   const go = i => track.scrollTo({ left: Math.max(0, Math.min(n - 1, i)) * track.clientWidth, behavior: "smooth" });
+  // înălțimea urmează slide-ul curent; în timpul glisării, cel mai înalt dintre cele două vecine
+  const fit = () => {
+    const p = track.scrollLeft / track.clientWidth;
+    const a = slides[Math.max(0, Math.floor(p))], b = slides[Math.min(n - 1, Math.ceil(p))];
+    track.style.height = Math.max(a.offsetHeight, b.offsetHeight) + "px";
+  };
   const update = () => {
     const i = cur();
     count.textContent = pad(i + 1) + " / " + pad(n);
     prev.disabled = i === 0; next.disabled = i === n - 1;
     [...dots.children].forEach((d, k) => d.setAttribute("aria-current", String(k === i)));
+    fit();
   };
+  if ("ResizeObserver" in window) { const ro = new ResizeObserver(() => fit()); slides.forEach(s => ro.observe(s)); }
+  if (document.fonts) document.fonts.ready.then(update);
   prev.addEventListener("click", () => go(cur() - 1));
   next.addEventListener("click", () => go(cur() + 1));
   deck.addEventListener("keydown", e => {
     if (e.key === "ArrowRight") { e.preventDefault(); go(cur() + 1); }
     if (e.key === "ArrowLeft") { e.preventDefault(); go(cur() - 1); }
   });
-  track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+  track.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update);
   update();
 });
