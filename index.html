@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toate prompturile: Montaj video cu AI | inginer.ai</title>
+<meta name="description" content="Toate prompturile din lecția „Montaj video cu AI: Claude Code + CapCut”: montaj, unghiuri, B-roll, motion graphics, VFX, color grading, sound design și reel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Cpath d='M9 22l7-12 7 12' fill='none' stroke='%2333F473' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #000;
+  --card: #181818;
+  --card-2: #111;
+  --line: #2a2a2a;
+  --text: #f3f3f3;
+  --soft: #e6e6e6;
+  --muted: #9a9a9a;
+  --accent: #33f473;
+  --accent-ink: #04150a;
+  --accent-soft: rgba(51, 244, 115, .12);
+  --head: "Montserrat", "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+img, video { display: block; max-width: 100%; }
+svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* header */
+.top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px max(16px, calc((100vw - 1180px) / 2)); background: rgba(0, 0, 0, .82); backdrop-filter: blur(10px); border-bottom: 1px solid #161616; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
+.brand .logo { font: 800 19px/1 var(--head); letter-spacing: -.3px; }
+.brand .logo b { color: var(--accent); font-weight: 800; }
+.brand small { display: block; color: var(--muted); font-size: 12.5px; font-weight: 600; margin-top: 3px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid #3a3a3a; color: var(--text);
+  font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; transition: border-color .2s, background .2s; }
+.pill:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+/* layout */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: minmax(0, 680px) 220px; gap: 0 72px; justify-content: space-between; }
+.hero { grid-column: 1 / -1; padding: 52px 0 18px; max-width: 760px; }
+.hero .over { color: #cfcfcf; font-weight: 600; font-size: 15px; margin: 0 0 14px; }
+h1 { font: 800 clamp(40px, 7vw, 61px)/1.05 var(--head); letter-spacing: -.02em; text-transform: uppercase; margin: 0 0 22px; }
+h1 span { color: var(--accent); }
+.hero p.intro { font-size: 17.5px; color: var(--soft); margin: 0; max-width: 640px; }
+main { min-width: 0; padding-bottom: 80px; }
+section { padding-top: 40px; }
+h2 { font: 800 clamp(28px, 4.4vw, 36px)/1.1 var(--head); letter-spacing: -.01em; margin: 0 0 22px; }
+h2 .num { color: var(--accent); margin-right: 14px; }
+h3 { font: 800 19px/1.2 var(--head); letter-spacing: -.01em; margin: 34px 0 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+h4 { font: 800 16.5px/1.3 var(--body); margin: 22px 0 8px; }
+.lead { color: var(--soft); font-size: 17px; margin: 0 0 20px; }
+.anchor { display: block; height: 0; }
+.tag { font: 700 11.5px/1 var(--body); color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(51, 244, 115, .3); padding: 5px 9px; border-radius: 999px; letter-spacing: .02em; }
+.note { color: var(--muted); margin: -4px 0 12px; font-size: 15px; }
+.hint { color: var(--muted); font-size: 14.5px; margin: 10px 0 0; }
+
+ul.does { margin: 0; padding-left: 20px; }
+ul.does li { margin: 4px 0; color: var(--soft); }
+ul.does li::marker { color: var(--accent); }
+
+/* media */
+.media { position: relative; margin: 14px 0 8px; border-radius: 14px; overflow: hidden; background: #0b0b0b; border: 1px solid #1c1c1c; }
+.media video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.media.vertical { max-width: 360px; margin-left: auto; margin-right: auto; }
+.media.vertical video { aspect-ratio: 9 / 16; }
+.sound { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px;
+  border: 0; background: rgba(0, 0, 0, .66); color: #fff; font: 700 12.5px/1 var(--body); cursor: pointer; backdrop-filter: blur(6px); opacity: .0; transition: opacity .2s, background .2s; }
+.media:hover .sound, .sound:focus-visible, .sound.sound-hint, .sound[aria-pressed="true"] { opacity: 1; }
+.sound:hover { background: rgba(0, 0, 0, .85); }
+.sound[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.sound .wave { display: none; }
+.sound[aria-pressed="true"] .wave { display: block; }
+.sound[aria-pressed="true"] .x { display: none; }
+@media (hover: none) { .sound { opacity: 1; } }
+.shot { width: 100%; border-radius: 14px; border: 1px solid #1c1c1c; margin: 14px 0 6px; }
+.shot.half { max-width: 340px; }
+.grid3, .grid2 { display: grid; gap: 10px; margin: 0 0 6px; }
+.grid3 { grid-template-columns: repeat(3, 1fr); }
+.grid2 { grid-template-columns: repeat(2, 1fr); align-items: center; }
+.grid3 .shot, .grid2 .shot { margin: 0; }
+.grid2.after-card { margin-top: 14px; }
+
+/* prompt card */
+.prompt { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 16px; }
+.prompt .attach { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; padding-right: 170px; color: var(--accent); font-weight: 700; font-size: 14px; min-height: 38px; }
+.prompt .attach svg { width: 16px; height: 16px; }
+.copy { position: absolute; top: 14px; right: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 0; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font: 800 13.5px/1 var(--body); cursor: pointer; transition: transform .15s, filter .15s; }
+.copy:hover { filter: brightness(1.08); }
+.copy:active { transform: scale(.97); }
+.copy svg { width: 16px; height: 16px; }
+.prompt-body { position: relative; max-height: 290px; overflow: hidden; margin-top: 44px; }
+.prompt .attach + .copy + .prompt-body { margin-top: 0; }
+.prompt.open .prompt-body { max-height: none; }
+.prompt:not(.open) .prompt-body.clipped::after { content: ""; position: absolute; inset: auto 0 0 0; height: 90px; background: linear-gradient(transparent, var(--card)); pointer-events: none; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font: 400 14.5px/1.6 var(--body); color: var(--soft); }
+.more { margin-top: 10px; padding: 0; border: 0; background: none; color: var(--accent); font: 700 14px/1.4 var(--body); cursor: pointer; }
+.more:hover { text-decoration: underline; }
+
+/* before / after */
+.compare { position: relative; border-radius: 14px; overflow: hidden; margin: 0 0 12px; aspect-ratio: 16 / 9; background: #0b0b0b; user-select: none; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.compare .after { clip-path: inset(0 0 0 var(--pos)); }
+.compare .handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; pointer-events: none; }
+.compare .handle::after { content: ""; position: absolute; top: 50%; left: 50%; width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center / 22px no-repeat; box-shadow: 0 2px 12px rgba(0, 0, 0, .5); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.compare .lbl { position: absolute; top: 12px; padding: 6px 10px; border-radius: 6px; background: rgba(0, 0, 0, .6); font: 800 12px/1 var(--body); letter-spacing: .08em; pointer-events: none; }
+.compare .lbl.l { left: 12px; }
+.compare .lbl.r { right: 12px; color: var(--accent); }
+
+/* slides */
+.deck { position: relative; outline: none; }
+.deck:focus-visible .deck-track { box-shadow: 0 0 0 2px var(--accent); }
+.deck-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 16px; overscroll-behavior-x: contain; }
+.deck-track::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; scroll-snap-align: start; padding: 34px 36px 32px; border-radius: 16px; border: 1px solid var(--line);
+  background: radial-gradient(120% 90% at 100% 0%, rgba(51, 244, 115, .09), transparent 55%), var(--card-2); display: flex; flex-direction: column; }
+.slide + .slide { margin-left: 0; }
+.kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; color: var(--muted); font: 700 13px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; }
+.kicker span { color: var(--accent); }
+.slide-title { display: block; font: 800 clamp(24px, 3.6vw, 32px)/1.12 var(--head); margin: 0 0 14px; letter-spacing: -.015em; }
+.slide p { margin: 0 0 12px; color: var(--soft); font-size: 16.5px; }
+.slide p.small, p.small { font-size: 14.5px; color: var(--muted); }
+.slide p b { color: var(--text); }
+.visual { margin-top: auto; padding-top: 10px; }
+.visual p.small { margin: 10px 0 0; }
+.deck-nav { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.nav { width: 42px; height: 42px; border-radius: 50%; border: 1px solid #3a3a3a; background: transparent; color: var(--text); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, background .2s, opacity .2s; }
+.nav:hover { border-color: var(--accent); background: var(--accent-soft); }
+.nav:disabled { opacity: .3; cursor: default; background: none; border-color: #3a3a3a; }
+.dots { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+.dots button { width: 22px; height: 4px; border-radius: 4px; border: 0; padding: 0; background: #333; cursor: pointer; }
+.dots button[aria-current="true"] { background: var(--accent); }
+.count { font: 700 13px/1 var(--body); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.vs-col { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 6px; background: rgba(255, 255, 255, .02); }
+.vs-col b { font: 800 16px/1.2 var(--head); margin-bottom: 4px; }
+.vs-col span { color: var(--muted); font-size: 14.5px; padding-left: 16px; position: relative; }
+.vs-col span::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: #444; }
+.vs-col.on { border-color: rgba(51, 244, 115, .45); background: var(--accent-soft); }
+.vs-col.on span { color: var(--soft); }
+.vs-col.on span::before { background: var(--accent); }
+.flow { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; flex-wrap: wrap; counter-reset: f; }
+.flow li { flex: 1 1 110px; position: relative; border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px 11px; background: rgba(255, 255, 255, .02); }
+.flow li b { display: block; font: 800 14.5px/1.2 var(--head); }
+.flow li span { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; line-height: 1.35; }
+.flow li.on { border-color: rgba(51, 244, 115, .45); background: var(--accent-soft); }
+.flow li.on b { color: var(--accent); }
+.code { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-top: 8px; background: #0a0a0a; }
+.code code { font: 500 13.5px/1.5 var(--mono); color: var(--accent); word-break: break-word; }
+.code small { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+.words { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.words div { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; background: rgba(255, 255, 255, .02); position: relative; }
+.words time { display: block; font: 500 12px/1 var(--mono); color: var(--muted); margin-bottom: 5px; }
+.words span { font-weight: 700; }
+.words .cut { border-color: rgba(255, 92, 92, .4); background: rgba(255, 92, 92, .07); }
+.words .cut span { text-decoration: line-through; color: #ff8a8a; }
+.words em { position: absolute; top: 8px; right: 9px; font: 700 10.5px/1 var(--body); font-style: normal; color: #ff8a8a; text-transform: uppercase; letter-spacing: .05em; }
+.tree { margin: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: #0a0a0a; font: 500 12.8px/1.65 var(--mono); color: var(--soft); white-space: pre; overflow-x: auto; }
+.tree i { color: var(--accent); font-style: normal; }
+.rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.rules li { position: relative; padding: 12px 14px 12px 42px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .02); color: var(--soft); font-size: 15.5px; }
+.rules li::before { content: ""; position: absolute; left: 15px; top: 17px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent); }
+.rules b { color: var(--text); }
+.table { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 15px; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 800; white-space: nowrap; }
+td:last-child { color: var(--accent); font-weight: 700; }
+
+/* contents */
+.toc { position: sticky; top: 92px; align-self: start; max-height: calc(100vh - 110px); overflow-y: auto; padding: 40px 0 30px; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+.toc p { font: 800 12.5px/1 var(--body); letter-spacing: .1em; color: var(--muted); margin: 0 0 14px; }
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc > ul > li > a { display: flex; gap: 8px; padding: 6px 0 6px 12px; border-left: 2px solid #222; color: var(--text); font-weight: 600; font-size: 14px; text-decoration: none; }
+.toc > ul > li > a span { color: var(--accent); font-weight: 800; }
+.toc li ul a { display: block; padding: 4px 0 4px 26px; border-left: 2px solid #222; color: var(--muted); font-size: 13px; text-decoration: none; line-height: 1.4; }
+.toc a:hover { color: var(--text); }
+.toc a.active { border-left-color: var(--accent); }
+
+footer { grid-column: 1 / -1; border-top: 1px solid #161616; padding: 26px 0 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 1000px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); }
+  .toc { display: none; }
+}
+@media (max-width: 640px) {
+  .top { padding: 12px 16px; }
+  .brand small { display: none; }
+  .pill { padding: 9px 14px; font-size: 13px; }
+  .hero { padding-top: 34px; }
+  .hero p.intro { font-size: 16.5px; }
+  .slide { padding: 24px 20px 22px; }
+  .visual { margin-top: 6px; }
+  .vs { grid-template-columns: 1fr; }
+  .words { grid-template-columns: repeat(2, 1fr); }
+  .prompt { padding: 16px 16px 14px; }
+  .prompt .attach { padding-right: 0; min-height: 0; margin-bottom: 10px; }
+  .copy { position: static; margin-bottom: 12px; }
+  .prompt-body { margin-top: 0; }
+  .grid3 { gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#">
+    <span><span class="logo">INGINER<b>.AI</b></span><small>Montaj video cu AI</small></span>
+  </a>
+  <a class="pill" href="https://inginer.ai/" target="_blank" rel="noopener">Cursul Inginer AI</a>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="over">Montaj video cu AI: Claude Code + CapCut</p>
+    <h1>Aici sunt toate<br><span>prompturile mele</span></h1>
+    <p class="intro">Tot ce am folosit în lecție e aici. Întâi, în câteva slide-uri, cum lucrează Claude cu filmările tale și cum ajunge montajul în CapCut, Premiere sau DaVinci Resolve. Apoi promptul fiecărei etape: îl copiezi, îl lipești în Claude Code și încerci.</p>
+  </div>
+
+  <main>
+    <section id="s00">
+      <h2><span class="num">00</span>Cum funcționează</h2>
+      <p class="lead">Înainte de prompturi, pe scurt: cum lucrează Claude cu filmările tale și cum ajunge montajul în CapCut, Premiere Pro sau DaVinci Resolve. Folosește săgețile sau glisează.</p>
+      <span id="cum-capcut" class="anchor"></span><span id="cum-premiere" class="anchor"></span>
+      
+      <div class="deck" tabindex="0" aria-roledescription="carusel" aria-label="Cum funcționează">
+        <div class="deck-track">
+        <article class="slide" aria-label="Slide 1 din 12">
+          <p class="kicker"><span>01</span>Unde lucrează Claude</p>
+          <h3 class="slide-title">Claude Code lucrează pe calculatorul tău</h3>
+          <p>Nu e chatul de pe claude.ai. Claude Code rulează local și citește filmarea direct de pe disc, deci clipul nu se urcă nicăieri. Îi dai calea fișierului sau îl atașezi, iar el lucrează cu programele instalate la tine.</p>
+          <div class="visual"><div class="vs">
+          <div class="vs-col"><b>Chatul claude.ai</b><span>Vede doar ce urci în conversație</span><span>Nu poate rula programe pe calculatorul tău</span></div>
+          <div class="vs-col on"><b>Claude Code</b><span>Citește și scrie fișierele tale</span><span>Rulează ffmpeg, Whisper, Python</span><span>Scrie proiecte CapCut, Premiere, DaVinci</span></div>
+        </div></div>
+        </article>
+        <article class="slide" aria-label="Slide 2 din 12">
+          <p class="kicker"><span>02</span>Cum „vede” un video</p>
+          <h3 class="slide-title">Claude nu se uită la film ca tine</h3>
+          <p>Scoate din filmare cadre (imagini) și sunetul, transcrie vocea cu timpul fiecărui cuvânt, apoi decide din imagini și text unde taie. La final verifică rezultatul tot așa: pe cadre și pe sunet.</p>
+          <div class="visual"><ol class="flow">
+          <li><b>Filmarea ta</b><span>MP4 de pe disc</span></li>
+          <li><b>ffmpeg</b><span>cadre + sunet</span></li>
+          <li><b>Whisper</b><span>text cu timpi</span></li>
+          <li><b>Claude</b><span>decide tăieturile</span></li>
+          <li class="on"><b>MP4 final</b><span>+ timeline editabil</span></li>
+        </ol></div>
+        </article>
+        <article class="slide" aria-label="Slide 3 din 12">
+          <p class="kicker"><span>03</span>Unealta 1</p>
+          <h3 class="slide-title">Ce e ffmpeg</h3>
+          <p>Un program gratuit, fără interfață, care face aproape orice cu video și sunet: taie, lipește, schimbă viteza, scoate cadre, aplică un LUT, aduce sunetul la nivelul potrivit. E motorul din spatele multor editoare. Comenzile nu le scrii tu, le scrie Claude.</p>
+          <div class="visual"><div class="code"><code>ffmpeg -i filmare.mp4 -vf fps=5 cadre/%04d.jpg</code><small>Scoate 5 cadre pe secundă, ca Claude să „vadă” filmarea.</small></div>
+        <div class="code"><code>ffmpeg -i filmare.mp4 -vn sunet.wav</code><small>Scoate sunetul, pentru transcriere.</small></div></div>
+        </article>
+        <article class="slide" aria-label="Slide 4 din 12">
+          <p class="kicker"><span>04</span>Unealta 2</p>
+          <h3 class="slide-title">Ce e Whisper</h3>
+          <p>Un model de transcriere gratuit, de la OpenAI, care rulează tot pe calculatorul tău și știe română. Îți dă fiecare cuvânt cu momentul exact în care l-ai spus. Așa găsește Claude pauzele, „ăăă”-urile și frazele spuse de două ori. Versiunile noi de ffmpeg (8.0+) îl au deja încorporat.</p>
+          <div class="visual"><div class="words">
+          <div><time>00:12,40</time><span>Claude</span></div>
+          <div><time>00:12,81</time><span>Code</span></div>
+          <div class="cut"><time>00:13,05</time><span>ăăă</span><em>tăiat</em></div>
+          <div class="cut"><time>00:13,90</time><span>pauză 1,2 s</span><em>tăiat</em></div>
+          <div><time>00:15,10</time><span>montează</span></div>
+          <div><time>00:15,62</time><span>singur</span></div>
+        </div></div>
+        </article>
+        <article class="slide" aria-label="Slide 5 din 12">
+          <p class="kicker"><span>05</span>CapCut</p>
+          <h3 class="slide-title">Cum ajunge montajul în CapCut</h3>
+          <p>Claude nu deschide CapCut și nu apasă butoane. Scrie direct pe disc fișierele proiectului, în folderul în care CapCut își ține proiectele. Când pornești CapCut, proiectul e în listă, cu toate tăieturile editabile.</p>
+          <div class="visual"><pre class="tree">%LOCALAPPDATA%\CapCut\User Data\Projects\com.lveditor.draft\
+├─ 01 - Motion Graphics\
+│  ├─ draft_content.json   <i>← pistele, tăieturile, timpii (în microsecunde)</i>
+│  └─ draft_meta_info.json
+└─ root_meta_info.json     <i>← lista de proiecte pe care o vezi în CapCut</i></pre></div>
+        </article>
+        <article class="slide" aria-label="Slide 6 din 12">
+          <p class="kicker"><span>06</span>CapCut</p>
+          <h3 class="slide-title">Regulile pentru CapCut</h3>
+          
+          <div class="visual"><ul class="rules">
+          <li><b>CapCut închis cât scrie Claude.</b> La ieșire CapCut își rescrie lista și poate pierde proiectul nou.</li>
+          <li><b>O versiune care salvează proiectele necriptat.</b> În lecție: CapCut desktop 9.6. Unele versiuni mai noi criptează proiectul și metoda nu mai merge.</li>
+          <li><b>Nu e un API oficial.</b> Claude folosește formatul intern al proiectelor; o actualizare de CapCut îl poate schimba.</li>
+          <li><b>Un script care scrie proiectul,</b> ideal împachetat ca skill, ca să nu fie refăcut de fiecare dată.</li>
+        </ul></div>
+        </article>
+        <article class="slide" aria-label="Slide 7 din 12">
+          <p class="kicker"><span>07</span>Ce primești</p>
+          <h3 class="slide-title">Rezultatul final și timeline-ul editabil</h3>
+          <p>Rezultatul final îl face Claude Code: un MP4 tăiat exact pe cadre și verificat. Proiectul din CapCut e bonusul: aceleași tăieturi, ca să continui tu montajul. Efectele grele (VFX, color grading, reel) le face Claude cu ffmpeg și ajung în CapCut ca un clip pe pistă.</p>
+          <div class="visual"><div class="vs">
+          <div class="vs-col on"><b>MP4 final</b><span>Făcut în Claude Code</span><span>Tăiat pe cadre, verificat la sincronizare</span></div>
+          <div class="vs-col"><b>Timeline editabil</b><span>Proiect CapCut, XML pentru Premiere sau DaVinci</span><span>Îl continui tu, de mână</span></div>
+        </div></div>
+        </article>
+        <article class="slide" aria-label="Slide 8 din 12">
+          <p class="kicker"><span>08</span>Din experiență</p>
+          <h3 class="slide-title">Ce am învățat pe drum</h3>
+          
+          <div class="visual"><ul class="rules">
+          <li><b>Cere tăieturi „exact pe cadre”.</b> Tăierea rapidă din ffmpeg pornește de la cadrul-cheie anterior și poate repeta cuvinte sau desincroniza buzele.</li>
+          <li><b>Cere verificări:</b> sincronizarea voce–buze la fiecare tăietură și cuvintele rămase după ce scoate „ăăă”-urile.</li>
+          <li><b>La sute de tăieturi, CapCut poate sacada la redare.</b> Soluția: o copie a filmării cu un cadru-cheie la începutul fiecărei tăieturi.</li>
+          <li><b>Înainte de orice generare pe Higgsfield,</b> cere-i lui Claude costul în credite.</li>
+        </ul></div>
+        </article>
+        <article class="slide" aria-label="Slide 9 din 12">
+          <p class="kicker"><span>09</span>Premiere Pro</p>
+          <h3 class="slide-title">Același proces în Premiere Pro</h3>
+          <p>Premiere importă timeline-uri din fișiere XML. Claude scrie un XML (formatul Final Cut Pro 7) cu pistele, tăieturile și markerii, iar tu îl deschizi cu <b>File → Import</b>. Apare o secvență nouă, editabilă. Premiere poate rămâne deschis.</p><p class="small">Avansat: Premiere se poate controla și prin scripturi (ExtendScript, UXP) sau prin servere MCP făcute de comunitate. Sunt neoficiale, așa că testează-le înainte.</p>
+          <div class="visual"><ol class="flow">
+          <li><b>Claude</b><span>scrie montaj.xml</span></li>
+          <li><b>File → Import</b><span>alegi fișierul</span></li>
+          <li class="on"><b>Secvența</b><span>apare în proiect</span></li>
+        </ol></div>
+        </article>
+        <article class="slide" aria-label="Slide 10 din 12">
+          <p class="kicker"><span>10</span>DaVinci Resolve</p>
+          <h3 class="slide-title">Același proces în DaVinci Resolve</h3>
+          <p>Resolve importă timeline-uri în XML, FCPXML, EDL sau OTIO, din <b>File → Import → Timeline</b>. În plus are un API oficial în Python: Claude poate scrie un script care creează proiectul, importă clipurile, construiește timeline-ul și pornește randarea.</p><p class="small">Scripturile pornite din afara programului merg în Resolve Studio (plătit). În varianta gratuită le pornești din meniul Workspace → Scripts.</p>
+          <div class="visual"><ol class="flow">
+          <li><b>Claude</b><span>scrie XML sau un script Python</span></li>
+          <li><b>Import → Timeline</b><span>sau Workspace → Scripts</span></li>
+          <li class="on"><b>Timeline-ul</b><span>gata în Resolve</span></li>
+        </ol></div>
+        </article>
+        <article class="slide" aria-label="Slide 11 din 12">
+          <p class="kicker"><span>11</span>Pe scurt</p>
+          <h3 class="slide-title">CapCut, Premiere, DaVinci</h3>
+          
+          <div class="visual"><div class="table"><table>
+          <thead><tr><th>Program</th><th>Cum ajunge montajul acolo</th><th>Programul</th></tr></thead>
+          <tbody>
+            <tr><td>CapCut</td><td>Claude scrie direct proiectul în folderul CapCut</td><td>închis</td></tr>
+            <tr><td>Premiere Pro</td><td>Claude scrie un XML, tu îl imporți</td><td>deschis</td></tr>
+            <tr><td>DaVinci Resolve</td><td>XML, FCPXML sau OTIO importat, ori un script Python</td><td>deschis</td></tr>
+          </tbody></table></div>
+        <p class="small">În toate trei, munca grea (tăieturi, sincronizare, efecte) o face Claude cu ffmpeg. Programul de montaj primește un timeline pe care îl continui tu.</p></div>
+        </article>
+        <article class="slide" aria-label="Slide 12 din 12">
+          <p class="kicker"><span>12</span>Înainte să începi</p>
+          <h3 class="slide-title">Ce instalezi</h3>
+          
+          <div class="visual"><ul class="rules">
+          <li><b>Claude Code:</b> aplicația desktop sau în terminal.</li>
+          <li><b>ffmpeg și Python:</b> Claude le poate instala singur.</li>
+          <li><b>Un model Whisper</b> (în lecție: large-v3-turbo), descărcat o singură dată.</li>
+          <li><b>Programul de montaj:</b> CapCut desktop, Premiere Pro sau DaVinci Resolve.</li>
+          <li><b>Pentru generări</b> (unghiuri, B-roll, VFX, sunet): un cont Higgsfield conectat la Claude.</li>
+        </ul>
+        <p class="small">Nu ai nevoie de Remotion sau de alte programe.</p></div>
+        </article>
+        </div>
+        <div class="deck-nav">
+          <button class="nav prev" type="button" aria-label="Slide-ul anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <div class="dots"></div>
+          <span class="count">01 / 12</span>
+          <button class="nav next" type="button" aria-label="Slide-ul următor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+      </div>
+    </section>
+    <section id="s01">
+      <h2><span class="num">01</span>Montaj de bază</h2>
+      
+      <figure class="media">
+        <video src="media/montaj.mp4" poster="media/montaj.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Ce face promptul</h4><ul class="does"><li>Transcrie filmarea local, cu Whisper</li><li>Scoate pauzele, respirațiile, „ăăă”-urile și repetițiile</li><li>Montează MP4-ul final, tăiat exact pe cadre, cu vocea pe buze</li><li>Pune aceleași tăieturi într-un proiect CapCut, ca timeline editabil</li></ul>
+      
+      <h3>Montează filmarea</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: filmarea ta brută</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Montează filmarea mea brută „motion graphics.mp4” direct aici, în Claude Code. Fă o tăietură strânsă și naturală: scoate pauzele lungi, respirațiile, interjecțiile „ăăă”, cuvintele de umplutură care sună nefiresc, începuturile greșite și repetițiile. Când spun același lucru de două ori, păstrează varianta mai bună. Nu tăia momentele în care rulează animațiile pe ecran, chiar dacă sunt fără sunet. Rezultatul final e un MP4 tăiat exact pe cadre, cu vocea pe buze: verifică sincronizarea la fiecare tăietură. Apoi pune aceleași tăieturi și într-un proiect CapCut nou, numit „01 - Motion Graphics”, ca să am un timeline editabil. CapCut e închis.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+    <section id="s02">
+      <h2><span class="num">02</span>Unghiuri B-cam și C-cam</h2>
+      
+      <figure class="media">
+        <video src="media/unghiuri.mp4" poster="media/unghiuri.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Ce face promptul</h4><ul class="does"><li>Exportă frazele pe care se schimbă unghiul</li><li>Generează unghiurile noi cu Seedance 2.5 pe Higgsfield</li><li>Verifică buzele și pune unghiurile exact pe cuvinte</li><li>Pune unghiurile și pe pista 2, într-un proiect CapCut</li></ul>
+      
+      <h3>Schimbă unghiurile</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: filmarea în care vrei unghiurile</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>În filmarea mea „A cam B cam C cam.mp4” spun pe rând: „este camera frontală”, „este camera secundară” și „este și camera terțiară”. Exact pe aceste cuvinte trebuie să se schimbe unghiul. Mai schimbă unghiul de încă două ori, pe fraze întregi: pe „După cum vedeți acum, camera mea se schimbă în diverse poziții” (B-cam) și pe „Există o modalitate de a obține acest efect în Seedance 2.5” (C-cam). Exportă segmentele și generează unghiurile noi cu Seedance 2.5 pe Higgsfield. B-cam: la nivelul ochilor, la 45° spre stânga mea, încadrat puțin mai strâns. C-cam: de jos, de la înălțimea biroului, lângă laptop, privind ușor în sus. Vocea, buzele și timpii rămân exact ca în original: fixează unghiul cu un cadru de start și unul de final și verifică sincronizarea buzelor înainte să le pui în montaj. Montează rezultatul final aici, în Claude Code, într-un MP4 cu unghiurile exact pe cuvintele respective și cu sunetul original. Apoi pune aceleași unghiuri și pe pista 2 a unui proiect CapCut nou, „02 - A cam B cam C cam”, ca timeline editabil. CapCut e închis.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+    <section id="s03">
+      <h2><span class="num">03</span>B-roll cu tine în cadru</h2>
+      
+      <figure class="media">
+        <video src="media/broll-in-filmare.mp4" poster="media/broll-in-filmare.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound sound-hint" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Ce îți trebuie</h4><ul class="does"><li>3 poze clare cu tine: din față, din stânga și din dreapta</li><li>Un cont Higgsfield conectat la Claude</li><li>Prompturile de mai jos, trimise pe rând în aceeași conversație</li></ul>
+      <h3 id="pozele-mele">Pozele mele</h3>
+      <div class="grid3"><img class="shot" src="images/selfie-stanga.jpg" alt="Profil stânga" loading="lazy"><img class="shot" src="images/selfie-fata.jpg" alt="Din față" loading="lazy"><img class="shot" src="images/selfie-dreapta.jpg" alt="Profil dreapta" loading="lazy"></div>
+      <span id="character-sheet" class="anchor"></span>
+      
+      <h3>Fă character sheet-ul</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: cele 3 poze cu tine</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Fă pe Higgsfield un character sheet din aceste 3 poze ale mele, 16:9, 2K. Port tricou negru, pantaloni gri închis și teniși negri.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <img class="shot" src="images/character-sheet.jpg" alt="Character sheet-ul generat" loading="lazy">
+      <span id="exemplu-parc" class="anchor"></span>
+      
+      <h3>Exemplu: eu în parc</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Folosește character sheet-ul și generează cu Seedance 2.5, 1080p, 16:9, un clip de 5 secunde din 2 cadre. Cadrul 1: un plan larg, fix, din lateral: merg prin parc toamna de la dreapta la stânga, cu laptopul sub braț, iar vântul ridică frunzele în jurul meu. Cadrul 2: un prim-plan care mă urmărește din mers: mă uit la frunze și zâmbesc.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <figure class="media">
+        <video src="media/broll-parc.mp4" poster="media/broll-parc.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      
+      <h3>Exemplu: pe plajă</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Acum unul pe plajă, 720p, 5 secunde, 2 cadre: stau pe un șezlong cu un cocktail în mână și laptopul închis pe nisip, apoi un prim-plan în care sorb din pai și zâmbesc mulțumit. Port cămașă albă de in descheiată și pantaloni scurți.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <figure class="media">
+        <video src="media/broll-plaja.mp4" poster="media/broll-plaja.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      
+      <h3>Exemplu: la duș</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Și unul la duș, 720p, 5 secunde, 2 cadre: mă spăl liniștit pe cap cu șampon, apoi un prim-plan: mă opresc brusc, deschid ochii mari, parcă mi-a venit o idee, și zâmbesc.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <figure class="media">
+        <video src="media/broll-dus.mp4" poster="media/broll-dus.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      
+      <h3 id="broll-in-filmare">B-roll-urile în filmarea mea</h3><p class="note">Rezultatul e clipul de la începutul secțiunii: B-roll-urile pe frazele lor, fără momentele în care citesc de pe ecran.</p>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: filmarea în care vorbești despre scene</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Iată filmarea mea „b-roll.mp4”. Pune cele 3 B-roll-uri (parcul, plaja și dușul) exact pe frazele în care vorbesc despre ele, cu vocea mea dedesubt. Ultima parte se repetă de două ori: scoate prima repetare și las-o pe ultima. Dacă trebuie, mărește-mi puțin viteza vorbirii, ca fraza să intre în durata B-roll-ului. Și cel mai important: să nu mă văd în momentele în care nu mă uit la cameră, ci citesc scriptul de pe ecran. Montajul final îl faci aici, în Claude Code; apoi pune aceleași tăieturi și într-un proiect CapCut nou, „03 - B-roll”, cu B-roll-urile pe pista 2. CapCut e închis.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+    <section id="s04">
+      <h2><span class="num">04</span>Motion graphics</h2>
+      
+      <figure class="media">
+        <video src="media/animatie-ui.mp4" poster="media/animatie-ui.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Ce fac prompturile</h4><ul class="does"><li>O animație UI curată, în stil Apple, pentru site-ul meu</li><li>Un intro animat cu mine ca personaj, din ce îi spun lui Claude</li><li>Un omuleț pixel-art care intră în filmarea mea</li></ul>
+      
+      <h3 id="animatie-ui">Animația UI pentru site-ul meu</h3><p class="note">Folosește skill-ul motion-director. Claude îți arată întâi un meniu cu stiluri și adâncimi.</p>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Studiază skill-ul meu motion-director. Creează o animație UI de 10 secunde, curată, în stil Apple, ca un video de lansare de produs, care prezintă cursul de pe site-ul meu: https://inginer.ai/. Ia culorile, fontul și textele de pe site. Vreau MP4-ul și sursele editabile, fără muzică.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3>Răspunsul la meniu</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>9 + 11, 16:9, 10 secunde, pe fundal întunecat cu verde, ca site-ul.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3 id="intro-ce-am-spus">Intro animat: ce i-am spus lui Claude</h3><p class="note">L-am spus liber, ca pe un mesaj vocal. Claude face din el prompturile de mai jos.</p>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: character sheet-ul tău</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Vreau să-mi faci un intro animat pentru video-ul meu, cam 5 secunde. În intro eu spun: „Montatorii video trebuie să înceapă să folosească Claude Code. Chiar acum.” Și vreau să mă transformi pe mine, din character sheet-ul ăsta, într-un personaj animat, un stil așa 2D-3D, ca în filmele de animație, dar mai întunecat, cinematic, cu albastru și negru, un gradient de albastru. Eu sunt noaptea într-o cameră întunecată, la calculator, montez un video și am o grămadă de piste în timeline, zeci, și sunt obosit, frustrat, e târziu. Poate să se vadă și ceasul. Și apoi mă uit într-o parte și văd că apare, strălucind, logoul lui Claude, ăla portocaliu, ca o steluță, și rămân uimit. Pot fi mai multe cadre, nu doar unul: un cadru larg cu camera, apoi aproape pe ecran, apoi fața mea obosită, ceasul, apoi întorc capul și la final cadrul cu logoul. Și peste tot vreau un fel de strat de efecte, să arate mai bine: puțin grain, vignetă, un pic de CRT, foarte puțin, blur pe margini, chestii de astea care ridică animația. Dar mai întâi hai să facem personajul, să-l blocăm, și după aia restul.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <h3 id="intro-ce-a-facut">Intro animat: ce a făcut Claude din asta</h3>
+      
+      <h3>1. Personajul (Nano Banana Pro)<span class="tag">Scris de Claude</span></h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Transform the man from the reference character sheet into a stylized animated character in a clean dimensional 2D/3D animation style, like a modern animated feature film: smooth shading, slightly stylized proportions. Keep his recognizable features: long brown hair tied in a low bun, full reddish-brown beard, green-grey eyes, black crew-neck t-shirt, dark grey trousers. Show a front view and a three-quarter view side by side in a relaxed neutral pose, on a flat dark navy background. Dark cinematic palette: navy and black with soft blue gradient light. No text.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <img class="shot" src="images/personaj-animat.jpg" alt="Personajul animat" loading="lazy">
+      
+      <h3>Aprobi personajul</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Personajul e bun. Fă cadrele-cheie și animația, la 720p.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3>2. Cadrele-cheie (Nano Banana Pro)<span class="tag">Scris de Claude</span></h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>@image1, cadrul de deschidere (referință: personajul A): Wide shot, 16:9. The stylized animated man from the reference sits slumped at a desk in a dark room at night, working on a video edit, lit only by the cold blue glow of a large monitor showing a crowded editing timeline. Empty coffee mugs, tangled cables, a window with distant city lights. Clean dimensional 2D/3D animation style, dark navy and black with blue gradients. No text, no logos.
+
+@image2, logoul: A glossy 3D version of the Claude AI logo: a coral-orange (#D97757) radial starburst of tapered, rounded rays around a small center, softly glowing, floating centered on a pure black background. Studio product render, subtle warm halation. No text.
+
+@image3, ecranul de aproape (referință: personajul A): Close-up of a computer monitor in a dark room. A realistic, generic video-editing interface: a preview window showing the same stylized animated man mid-speech, and below it a timeline crammed with dozens of stacked colorful video and audio tracks, a playhead and a mouse cursor. Cold blue glow, clean dimensional 2D/3D animation style. No brand names or logos on the interface.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <img class="shot" src="images/intro-cadre-cheie.jpg" alt="Cadrele-cheie ale intro-ului" loading="lazy">
+      
+      <h3>3. Animația (Seedance 2.5)<span class="tag">Scris de Claude</span></h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Create a 5-second cinematic animation.
+
+
+@image1: opening frame, the character and the dark editing room.
+
+@image2: the glowing coral-orange Claude logo.
+
+@image3: monitor close-up with the crowded editing timeline.
+
+SHOT 1, 0.00–0.80 s
+Wide shot matching @image1. The exhausted editor sits slumped at the desk in the dark blue-lit room, making small, slow mouse movements.
+
+HARD CUT.
+
+SHOT 2, 0.80–1.50 s
+Monitor close-up matching @image3. The cursor drags a tiny clip across the overcrowded timeline; dozens of tracks shift, and a spinning loading wheel appears over the frozen preview. Keep the interface stable and realistic.
+
+HARD CUT.
+
+SHOT 3, 1.50–2.05 s
+Tight face close-up. Heavy eyelids; he rubs his eyes with one hand and lets out a quiet, frustrated exhale.
+
+HARD CUT.
+
+SHOT 4, 2.05–2.45 s
+Close-up of a small digital desk clock glowing &quot;02:47&quot; in the dark.
+
+HARD CUT.
+
+SHOT 5, 2.45–3.50 s
+Face close-up from a new angle. A warm coral-orange glow appears offscreen to his right, cutting through the blue. His eyes notice it first, then he slowly turns his head toward it with natural, fluid movement; his expression shifts from fatigue to curiosity.
+
+HARD CUT TO A DISTINCT NEW CAMERA ANGLE.
+
+SHOT 6, 3.50–5.00 s
+Wider side view: the man seated on the left; on the right a large @image2 logo hovers and slowly rotates, its warm coral-orange light illuminating his face against the cold blue room. The exact text &quot;Claude Code&quot; appears beneath the logo in clean white lettering with a soft glow. He stays seated, hands resting; his eyes widen, his brow relaxes and his lips gently part in quiet awe. Hold on this sense of wonder.
+
+STYLE
+Clean dimensional 2D/3D animation, smooth shading. Dark navy and black with blue gradients; the only warm color is the coral-orange of the logo and its glow. No painterly brush strokes. Subtle film grain, vignette, very slight CRT texture and soft radial blur at the outer edges. Keep the face, the interface and the logo clear. Distinct hard cuts, no morphing transitions.
+
+AUDIO
+Clean, restrained cinematic sound effects only. No music, beat, generated dialogue or vocal exclamations. Soft room tone, slow mouse clicks, a frustrated exhale, one soft digital clock beep, a warm airy swell as the glow appears and a delicate shimmer on the logo reveal. Leave room for the original voiceover.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <figure class="media">
+        <video src="media/intro-animat.mp4" poster="media/intro-animat.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound sound-hint" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      
+      <h3 id="pixel-guy">Omulețul pixel-art</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: filmarea ta</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Adaugă la începutul filmării mele „A cam B cam C cam.mp4” un omuleț pixel-art care seamănă cu mine: păr șaten lung, strâns la spate, barbă, pulover maro pe gât, pantaloni închiși la culoare. Să fie mic, cam 30% din înălțimea cadrului, în stânga jos, departe de fața mea. Intră din stânga cu un mers de joc retro, se oprește și se întoarce spre cameră, apoi îmi face cu mâna, iar deasupra lui apare un balon pixel-art cu „Abonează-te!”, ușor de citit. După aceea balonul dispare, el sare spre cameră și cade prin marginea de jos a cadrului. Totul în vreo 4 secunde, cu pixeli pătrați și clari și cu sunete 8-bit discrete sub vocea mea. Filmarea mea să rămână neatinsă, la 1080p.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <figure class="media">
+        <video src="media/pixel-guy.mp4" poster="media/pixel-guy.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound sound-hint" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+    </section>
+    <section id="s05">
+      <h2><span class="num">05</span>VFX</h2>
+      
+      <figure class="media">
+        <video src="media/vfx.mp4" poster="media/vfx.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound sound-hint" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Cum funcționează</h4><ul class="does"><li>Faci creatura și recuzita pe un fundal gri uniform</li><li>Claude analizează filmarea cadru cu cadru și scrie promptul Seedance cu timpii exacți</li><li>Întâi un test la 480p, apoi varianta finală la 1080p</li></ul>
+      
+      <h3 id="creatura">Creatura</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Fă pe Higgsfield, cu Nano Banana Pro, o creatură fotorealistă mică și puțin înfricoșătoare: un liliac-gremlin slab, cu blană gri rară, aripi de piele rupte, urechi mari, ochi chihlimbarii și un rânjet cu dinți ca acele. Pe fundal gri uniform, fără umbre, ca s-o pot pune apoi într-un video.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <img class="shot half" src="images/creatura.jpg" alt="Creatura" loading="lazy">
+      
+      <h3 id="fata-spate">Din față și din spate</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Acum fă aceeași creatură din față și din spate, una lângă alta, aceeași poză și aceleași detalii, pe același fundal gri.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <img class="shot" src="images/creatura-fata-spate.jpg" alt="Creatura din față și din spate" loading="lazy">
+      
+      <h3 id="recuzita">Recuzita</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Mai fă două referințe pe gri: o baghetă magică ieftină, făcută în casă, cu bandă verde-argintie și o steluță de carton, și o dubă portocalie retro, cu un robot simpatic la volan.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      <div class="grid2 after-card"><img class="shot" src="images/bagheta.jpg" alt="Bagheta magică" loading="lazy"><img class="shot" src="images/duba-robot.jpg" alt="Duba cu robotul" loading="lazy"></div>
+      
+      <h3 id="totul-impreuna">Totul împreună</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: filmarea ta pentru VFX</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Analizează filmarea mea VFX.mp4 cadru cu cadru și ce spun în ea. Când încep să vorbesc, creatura intră în zbor și aterizează pe raft, iar eu n-o observ. Când iau pixul de pe birou, pixul devine bagheta. Când arăt spre raft, din baghetă pleacă un fulger și creatura dispare într-o explozie de confetti. La final, duba sparge peretele din spatele meu și mă aruncă din cadru, iar robotul spune „Ups!”. Fă întâi un test la 480p.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3>Promptul Seedance făcut de Claude<span class="tag">Scris de Claude</span></h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>@Video1: Original studio take of a young man with long light-brown hair tied back in a bun, a full reddish-brown beard, a black crew-neck t-shirt and light-blue jeans, in a small content studio: a floor-to-ceiling dark-green velvet curtain hanging in front of the solid back wall, a white bookshelf screen-left with a gold trophy, a brass globe and books on its top shelf, a black leather office chair behind a grey laptop in the foreground left, a red thermos on the desk, and a black grid softbox hanging top-right. Locked-off static camera for the whole take. Preserve the man&#x27;s identity, face, wardrobe, full performance, dialogue, lip-sync, gestures, framing, lens, exposure and the static camera exactly until the impact; add only the creature, the wand swap, the vanish spell and the van crash.
+
+@Image1: Reference photo of a small gaunt grey bat-creature: torn translucent leathery wings, oversized pointed ears, bulging amber eyes with slit pupils, a wide grin of tiny needle teeth, wiry patchy grey fur, long thin clawed limbs, a whip-like tail. Appearance and anatomy reference only; ignore the grey background and lighting, relight and grade it entirely to match @Video1.
+
+@Image2: Reference photo of a cheap homemade magic wand: a thin stick wrapped in shiny green and silver tape, a lopsided gold cardboard star on top, plastic rhinestones, a small red pompom and a tiny gold jingle bell on frayed string. Prop reference only; the wand stays visibly cheap, the magic it produces does not.
+
+@Image3: Reference photo of a boxy retro delivery van in scuffed faded orange with a dented chrome bumper and round headlights, driven by a round-headed robot with a scuffed white helmet head, a black visor with blue pixel-LED eyes and a small antenna. Design and material reference only; ignore the background and lighting.
+
+Photoreal. 16:9. 24 s, matching the source runtime. Same soft studio light, grain, noise, exposure and sharpness as @Video1 throughout; nothing added may read as a pasted-in layer. NON-IP: generic creature and generic vehicle and robot design, not based on any brand or character. SFX and source dialogue only.
+
+One continuous take, locked static camera, same framing and lens as the source. The man performs exactly as in the source, lips matching the source exactly, with natural loose arm weight and follow-through on every gesture. From 0.0 to 1.6 s he stays visible walking out of frame screen-right exactly as in the source; from 1.6 to 4.0 s the room is empty and nothing is added; at 4.0 s he walks back in exactly as in the source.
+
+There is no creature in the room before 6.3 s. At 6.3 s, exactly when the man starts speaking, the creature from @Image1 darts in from screen-right with real leathery wingbeats, passing high behind him, and by 7.4 s it lands on the top of the white bookshelf itself, next to the globe, gripping the shelf edge with its claws like a real animal; its weight makes the trophy and the globe wobble slightly. It sits at the same focal depth as the shelf, lit by the same soft key light, with a real contact shadow on the shelf and the curtain, breathing, with a small idle sway and occasional curious head tilts toward the man. He stays completely unaware of it and keeps talking.
+
+At about 12.0 s, when the man picks up the pen from the desk, it is the wand from @Image2 instead, with the same grip and hand path; the bell and pompom swing with real pendulum lag and jingle softly. At about 14.0 s he raises it toward the top of the bookshelf exactly as he points the pen in the source. At about 14.3 s a warm-white magical light kindles at the star tip, throwing real bounce light onto his hand and the bookshelf, and at about 14.6 s a tight bolt streaks to the creature. On contact the creature vanishes instantly, with no smoke, no dust and no fade, and in the same instant a burst of small, bright, multicoloured paper confetti explodes from that spot: flat paper pieces that flutter, flip, catch the key light and fall with real gravity and air drag, settling on the shelf and the books, a few pieces drifting down past the chair. At about 16.4 s he puts the wand down on the desk exactly as he puts the pen down in the source, then keeps talking normally.
+
+At 20.0 s, while he stands still with his hands together, the van from @Image3 smashes through the solid back wall behind him at real road speed, about 50 km/h, without slowing down: the wall behind the curtain explodes inward, plasterboard and wooden studs shatter, heavy chunks of debris and plaster dust blast into the room, and the curtain is ripped off its rail and dragged along on the van&#x27;s roof. The van, full scale, its bonnet higher than his waist, drives nose-first from the back of the room toward the front-left. Its front corner hits the man squarely from behind at full speed. This is a real, heavy vehicle impact, not a light bump or a push: on contact his whole body is thrown instantly and violently out of frame screen-left in a fast ballistic arc within 3 to 4 frames, his feet leaving the floor, his legs swept out from under him, his head and arms whipping back with the momentum. Real physics and momentum transfer: no slow motion, no floating, no hesitation before the hit, no cartoon bounce; keep it non-graphic, with no blood and no injury detail. Only after the impact does the van brake hard, skidding with locked wheels to a stop with its front half inside the room, three-quarters to camera, its windshield clearly visible. The impact shakes the room: the camera takes one sharp jolt, then holds its exact static framing while debris lands and plaster dust rolls out and settles in the soft key light. From the moment of impact, ignore the man&#x27;s remaining movement in @Video1: he does not return, and nobody walks toward the camera. At about 21.5 s the robot driver&#x27;s blue LED eyes flip into sheepish curved arcs behind the windshield and it says one word in a small, tinny robot voice: &quot;Ups!&quot; (pronounced &quot;oops&quot;). Dust drifts to the end; the camera stays locked.
+
+Lock-down: face and identity unchanged, lips matching the source exactly until the impact, camera and room identical to the source until the crash, the creature and the van lit and graded to match the room&#x27;s real light at all times, no CG-clean or pasted-in look on any added element.
+
+SFX and source dialogue only: at 6.3 s a leathery wing-flutter whoosh passing behind the man, then a short raspy chitter as the creature lands at 7.4 s, a faint shelf creak and occasional soft wingbeats; at 12.0 s a tiny bell jingle; at 14.3 s a low magical hum building into a sharp crackling zap at 14.6 s, a light magical pop as the creature vanishes, then soft paper rustle and confetti patter on the shelf; the man&#x27;s source dialogue unchanged; at 20.0 s a huge crunching wall breach, splintering wood and plaster, a heavy engine roar, one hard, heavy body impact, a fast whoosh as he flies out of frame, a long tyre skid and a metal groan, then debris clattering down and a dust hiss; at 21.5 s a small tinny robot voice: &quot;Ups!&quot;; a soft servo whir; a low engine idle to the end. No music.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3>Varianta finală</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Testul e bun. Fă-l la 1080p, dar vreau ca lovitura mașinii să fie mai cu impact: să spargă peretele, iar eu să nu par ușor tamponat, ci să zbor brusc din cadru, ca lovit de o mașină reală la viteză. Și creatura să apară abia când încep să vorbesc.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+    <section id="s06">
+      <h2><span class="num">06</span>Color grading</h2>
+      
+      <div class="compare" style="--pos:50%">
+        <img src="images/grading-parc-baza.jpg" alt="B-roll în parc, fără color grading" loading="lazy">
+        <img class="after" src="images/grading-parc-gradat.jpg" alt="B-roll în parc, cu color grading" loading="lazy">
+        <span class="lbl l">ÎNAINTE</span><span class="lbl r">DUPĂ</span>
+        <span class="handle" aria-hidden="true"></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compară înainte și după">
+      </div>
+      
+      <div class="compare" style="--pos:50%">
+        <img src="images/grading-dus-baza.jpg" alt="B-roll la duș, fără color grading" loading="lazy">
+        <img class="after" src="images/grading-dus-gradat.jpg" alt="B-roll la duș, cu color grading" loading="lazy">
+        <span class="lbl l">ÎNAINTE</span><span class="lbl r">DUPĂ</span>
+        <span class="handle" aria-hidden="true"></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compară înainte și după">
+      </div>
+      <p class="hint">Trage de slider ca să vezi diferența.</p>
+      <h4>Ce face promptul</h4><ul class="does"><li>Aplică direct un look cinematic teal & orange, fără conversie din log</li><li>Păstrează pielea naturală</li><li>Face o comparație cu ecranul împărțit și un proiect CapCut cu originalele și varianta gradată</li></ul>
+      
+      <h3>Gradează B-roll-urile</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: B-roll-urile tale</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Gradează B-roll-urile mele cu parcul, plaja și dușul, puse cap la cap. Nu sunt filmate în log, deci nu face conversie; aplică direct un look cinematic teal &amp; orange: umbre reci spre teal, lumini calde, contrast mai ferm, dar pielea să rămână naturală, fără buze sau obraji înroșiți. Fă-mi și un clip de comparație cu ecranul împărțit pe verticală: în stânga fără color grading, în dreapta cu, cu câte o etichetă sus. Rezultatul final îl faci aici, în Claude Code. Apoi pune originalele și varianta gradată și într-un proiect CapCut nou, „06 - Color grading”, pe piste separate, ca timeline editabil. CapCut e închis.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+    <section id="s07">
+      <h2><span class="num">07</span>Sound design</h2>
+      
+      <figure class="media">
+        <video src="media/sound-design.mp4" poster="media/sound-design.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound sound-hint" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Ce face promptul</h4><ul class="does"><li>Analizează animația cadru cu cadru</li><li>Scrie promptul Seedance 2.5 pentru efecte sonore sincronizate</li><li>Generează sunetul și îl pune sub animația originală, fără s-o modifice</li></ul>
+      
+      <h3 id="sunet-ce-am-spus">Ce i-am spus lui Claude</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: animația ta</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Scrie-mi un prompt Seedance 2.5 care să genereze efecte sonore sincronizate pentru animația UI de 10 secunde. Analizează video-ul cadru cu cadru și înțelege ce sunete ne trebuie. Apoi generează sunetul și pune-l sub animație.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3 id="sunet-prompt">Promptul făcut de Claude<span class="tag">Scris de Claude</span></h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Create a clearly audible, precisely synchronized sound-effects soundtrack for the supplied inginer.ai UI animation in @Video1. Use the reference video as the timing master. Preserve its visuals, text, animation, transitions and speed exactly. Replace its audio with sound effects only.
+
+SOUND CHARACTER
+Clean, modern, tactile product-demo sound design: dry interface clicks, rounded digital pops, silky air swishes, light card flicks and restrained low-frequency impacts. Every effect must be clearly audible at normal playback volume, including on phone speakers. Minimal styling means fewer deliberate sounds, not barely audible sound. No music, rhythmic backing, speech, narration, singing, environmental ambience or continuous electronic drone.
+
+SYNCHRONIZED CUE SEQUENCE
+Times are seconds from the first frame. Follow the actual visible movement if a timestamp differs slightly.
+
+0.00–0.25: Quiet opening while the green glow fades in on the dark background.
+
+0.25–0.80: A short, airy upward swish as &quot;Devino Inginer AI&quot; rises into view word by word.
+
+0.55–1.15: As the dark INGINER.AI notification card rises and its two stacked layers settle, add a rounded, tactile &quot;pup&quot; around 0.95, followed by two much lighter, tightly spaced settling ticks. A lightweight floating interface: no heavy impact, no cartoon boing.
+
+1.15–1.85: A brief, delicate directional swish follows the cursor moving along a small arc from the lower right toward the card. Stop the swish when the cursor stops. No clicking during the approach.
+
+1.85: A tiny, soft hover tick as the card border lights up green.
+
+2.10: One crisp, dry mouse click synchronized with the green click ripple on the card. This is a distinct foreground accent.
+
+2.18–2.88: Immediately after the click, a smooth upward &quot;shwoop&quot; follows the card expanding into the full browser page. Build the sound with the movement, then taper into a soft, low-mid landing tap as the page settles around 2.88.
+
+2.75–3.85: As the four statistic numbers count up, a very light, fast, soft digital ticking that rises slightly in pitch and stops with one small bright settle tick at 3.85. Keep it subtle, below the page landing.
+
+3.05–3.30: A small, rounded digital pop follows the &quot;400+ absolvenți activi&quot; pill appearing at the lower right, positioned slightly right in stereo.
+
+3.85–5.35: Quiet reading space. No sound on the slow camera push, no scrolling, no typing.
+
+5.35–5.70: A compact transition swish follows the page receding into depth.
+
+5.60–6.00: The central &quot;13 Claude Code de la 0&quot; card comes forward beneath &quot;Prompt. Imagine. Video. Agenți.&quot;; finish with a cushioned, slightly deeper card-placement tap around 5.95.
+
+5.90–6.30: As the two side cards fan out from behind the central card, two light, closely staggered card-flick swishes follow their actual movement: one spreading left, one spreading right. Add restrained, dry settling ticks as they reach their resting positions around 6.25. The central card sounds slightly weightier than the side cards.
+
+6.30–7.75: Quiet hold while the three cards float gently. Do not add sound to the idle movement.
+
+7.75–8.30: As the cards draw inward and the dark circle with a glowing green rim expands from the lower centre to fill the screen, use a short inward suction sound that opens into a fuller, widening &quot;whoom&quot;. Match its acceleration to the circle&#x27;s growth. Resolve with a controlled, rounded low-mid impact when the screen is fully covered around 8.30. This is the strongest transition, still elegant and compact, without an explosion or a long rumble.
+
+8.35–8.75: As the white INGINER.AI wordmark with the green &quot;.AI&quot; emerges, add a clean, bright, glass-like logo accent with a warm, short body. A tiny rightward flick follows the green chevron around 8.75. A single brand reveal, not a musical jingle.
+
+8.70–8.90: A rounded interface pop accompanies the green &quot;Solicită apel&quot; button rising into position. This is an appearance sound, not a mouse click: no cursor clicks this button.
+
+8.90–10.00: Let the final accent decay naturally into silence while the end card holds. No extra closing hit.
+
+MIX AND TIMING
+Align clicks with the visible click ripple, swishes with movement and settling taps with deceleration. Use short attacks and short tails so individual cues stay distinct. Keep the click and the main impacts centred; use subtle stereo width for the fanning cards and the circular wipe. Make the click, the page expansion, the card fan, the circular wipe and the logo clearly readable, without clipping or harsh treble. Keep the exact 10.0-second timing; do not stretch, speed up or redistribute the animation.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+    <section id="s08">
+      <h2><span class="num">08</span>Reel montat în Claude Code</h2>
+      
+      <figure class="media vertical">
+        <video src="media/reel.mp4" poster="media/reel.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="sound sound-hint" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Pornește sunetul</span></button>
+      </figure>
+      <h4>Ce face promptul</h4><ul class="does"><li>Măsoară stilul referinței cadru cu cadru: tăieturi, zoom-uri, titluri</li><li>Găsește fonturile și culorile referinței</li><li>Subtitrări cuvânt cu cuvânt și titluri mari în spatele tău</li><li>B-roll generat pe Higgsfield și scene grafice făcute local</li><li>SFX pe tăieturi, sunet la −14 LUFS, MP4 vertical gata de postat</li></ul>
+      
+      <h3>Reel după referință</h3>
+      <div class="prompt">
+        <p class="attach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>Atașează: brutul tău și reel-ul de referință</p>
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Montează un reel din brutul meu după referință. Clipul 1 (brut.mp4) e brutul: avatarul meu care prezintă 4 funcții ChatGPT. Clipul 2 (referinta.mp4) e referința pe care trebuie s-o replici cât mai fidel. Montajul îl faci direct aici, fără CapCut, și scoți un MP4 vertical, gata de postat.
+1. Stilul: analizează referința cadru cu cadru și măsoară-i stilul: ritmul tăieturilor, zoom-urile, cum intră și ies titlurile și unde stau pe ecran.
+2. Fontul: identifică fontul titlurilor mari și pe cel al subtitrărilor. Dacă e comercial, folosește cel mai apropiat font gratuit care are diacriticele românești.
+3. Culorile: ia exact culorile din referință (roșul titlurilor și al casetelor de subtitrare) și fă o corecție de culoare caldă, ca în referință.
+4. Subtitrările: cuvânt cu cuvânt după vocea mea, câte 1–3 cuvinte, în aceleași stiluri ca în referință (simple și pe dreptunghi roșu înclinat). Titlurile mari, pe cuvintele-cheie, în spatele meu, ca în referință.
+5. B-roll: unde referința taie pe B-roll, generează pe Higgsfield cu Seedance 2.5, 9:16, 4 secunde, cu același look (filmat cu telefonul, lumină caldă, culori saturate), legat de ce spun în fraza respectivă, fără logo-uri reale. Scenele grafice (polaroid, pagina de profil, colajul) fă-le local, fără credite.
+6. Taie pauzele, pune SFX pe tăieturi și pe titluri, iar sunetul să fie la −14 LUFS.
+Spune-mi costul B-roll-ului înainte să generezi.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+      
+      <h3>Aprobi</h3>
+      <div class="prompt">
+        
+        <button class="copy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copiază promptul</span></button>
+        <div class="prompt-body"><pre>Da, generează B-roll-urile și montează reel-ul.</pre></div>
+        <button class="more" type="button" hidden>Arată tot promptul</button>
+      </div>
+    </section>
+  </main>
+
+  <aside class="toc" aria-label="Cuprins">
+    <p>CUPRINS</p>
+    <ul><li><a href="#s00" data-sec="s00"><span>00</span>Cum funcționează</a><ul><li><a href="#cum-capcut" data-sec="s00">Claude și CapCut</a></li><li><a href="#cum-premiere" data-sec="s00">Premiere și DaVinci</a></li></ul></li><li><a href="#s01" data-sec="s01"><span>01</span>Montaj de bază</a></li><li><a href="#s02" data-sec="s02"><span>02</span>Unghiuri B-cam și C-cam</a></li><li><a href="#s03" data-sec="s03"><span>03</span>B-roll cu tine în cadru</a><ul><li><a href="#pozele-mele" data-sec="s03">Pozele mele</a></li><li><a href="#character-sheet" data-sec="s03">Character sheet-ul</a></li><li><a href="#exemplu-parc" data-sec="s03">Exemplu: eu în parc</a></li><li><a href="#broll-in-filmare" data-sec="s03">B-roll-urile în filmare</a></li></ul></li><li><a href="#s04" data-sec="s04"><span>04</span>Motion graphics</a><ul><li><a href="#animatie-ui" data-sec="s04">Animația UI pentru site</a></li><li><a href="#intro-ce-am-spus" data-sec="s04">Intro animat: ce i-am spus lui Claude</a></li><li><a href="#intro-ce-a-facut" data-sec="s04">Intro animat: ce a făcut Claude</a></li><li><a href="#pixel-guy" data-sec="s04">Omulețul pixel-art</a></li></ul></li><li><a href="#s05" data-sec="s05"><span>05</span>VFX</a><ul><li><a href="#creatura" data-sec="s05">Creatura</a></li><li><a href="#fata-spate" data-sec="s05">Din față și din spate</a></li><li><a href="#recuzita" data-sec="s05">Recuzita</a></li><li><a href="#totul-impreuna" data-sec="s05">Totul împreună</a></li></ul></li><li><a href="#s06" data-sec="s06"><span>06</span>Color grading</a></li><li><a href="#s07" data-sec="s07"><span>07</span>Sound design</a><ul><li><a href="#sunet-ce-am-spus" data-sec="s07">Ce i-am spus lui Claude</a></li><li><a href="#sunet-prompt" data-sec="s07">Promptul făcut de Claude</a></li></ul></li><li><a href="#s08" data-sec="s08"><span>08</span>Reel montat în Claude Code</a></li></ul>
+  </aside>
+
+  <footer>
+    <span>Lecția „Montaj video cu AI: Claude Code + CapCut” · <a href="https://inginer.ai/" target="_blank" rel="noopener">inginer.ai</a></span>
+    <span>Montat și scris cu Claude Code</span>
+  </footer>
+</div>
+
+<script>
+// copiere
+function copyFallback(t) {
+  const a = document.createElement("textarea");
+  a.value = t; a.setAttribute("readonly", ""); a.style.position = "fixed"; a.style.opacity = "0";
+  document.body.appendChild(a); a.select();
+  try { document.execCommand("copy"); } finally { a.remove(); }
+}
+function copyText(t) {
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t).catch(() => copyFallback(t));
+  copyFallback(t);
+  return Promise.resolve();
+}
+document.querySelectorAll(".prompt").forEach(card => {
+  const btn = card.querySelector(".copy"), label = btn.querySelector("span"), pre = card.querySelector("pre");
+  btn.addEventListener("click", () => {
+    copyText(pre.textContent).then(() => {
+      label.textContent = "Copiat!";
+      setTimeout(() => { label.textContent = "Copiază promptul"; }, 1600);
+    });
+  });
+  const body = card.querySelector(".prompt-body"), more = card.querySelector(".more");
+  const check = () => {
+    if (card.classList.contains("open")) return;
+    const clipped = body.scrollHeight > body.clientHeight + 4;
+    body.classList.toggle("clipped", clipped);
+    more.hidden = !clipped;
+  };
+  more.addEventListener("click", () => {
+    const open = card.classList.toggle("open");
+    more.textContent = open ? "Arată mai puțin" : "Arată tot promptul";
+    if (!open) card.scrollIntoView({ block: "nearest" });
+  });
+  check();
+  window.addEventListener("resize", check);
+});
+
+// clipuri: pornesc doar când se văd; butonul de sunet
+const vio = new IntersectionObserver(es => es.forEach(e => {
+  const v = e.target;
+  if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+}), { threshold: 0.35 });
+document.querySelectorAll(".media").forEach(fig => {
+  const v = fig.querySelector("video"), b = fig.querySelector(".sound"), s = b.querySelector("span");
+  vio.observe(v);
+  b.addEventListener("click", () => {
+    const on = v.muted;
+    document.querySelectorAll(".media video").forEach(o => { if (o !== v && !o.muted) { o.muted = true; const ob = o.parentElement.querySelector(".sound"); ob.setAttribute("aria-pressed", "false"); ob.querySelector("span").textContent = "Pornește sunetul"; } });
+    v.muted = !on;
+    if (on) { v.currentTime = 0; v.play().catch(() => {}); }
+    b.setAttribute("aria-pressed", String(on));
+    s.textContent = on ? "Oprește sunetul" : "Pornește sunetul";
+  });
+});
+
+// înainte / după
+document.querySelectorAll(".compare").forEach(c => {
+  const r = c.querySelector("input");
+  r.addEventListener("input", () => c.style.setProperty("--pos", r.value + "%"));
+});
+
+// slide-uri
+document.querySelectorAll(".deck").forEach(deck => {
+  const track = deck.querySelector(".deck-track"), slides = [...track.children];
+  const prev = deck.querySelector(".prev"), next = deck.querySelector(".next"), count = deck.querySelector(".count"), dots = deck.querySelector(".dots");
+  const n = slides.length, pad = x => String(x).padStart(2, "0");
+  slides.forEach((_, i) => {
+    const d = document.createElement("button");
+    d.type = "button"; d.setAttribute("aria-label", "Slide " + (i + 1));
+    d.addEventListener("click", () => go(i));
+    dots.appendChild(d);
+  });
+  const cur = () => Math.round(track.scrollLeft / track.clientWidth);
+  const go = i => track.scrollTo({ left: Math.max(0, Math.min(n - 1, i)) * track.clientWidth, behavior: "smooth" });
+  const update = () => {
+    const i = cur();
+    count.textContent = pad(i + 1) + " / " + pad(n);
+    prev.disabled = i === 0; next.disabled = i === n - 1;
+    [...dots.children].forEach((d, k) => d.setAttribute("aria-current", String(k === i)));
+  };
+  prev.addEventListener("click", () => go(cur() - 1));
+  next.addEventListener("click", () => go(cur() + 1));
+  deck.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { e.preventDefault(); go(cur() + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(cur() - 1); }
+  });
+  track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+  window.addEventListener("resize", update);
+  update();
+});
+
+// cuprins: secțiunea curentă
+const links = [...document.querySelectorAll(".toc > ul > li > a")];
+const sio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  links.forEach(a => a.classList.toggle("active", a.dataset.sec === e.target.id));
+}), { rootMargin: "-30% 0px -60% 0px" });
+document.querySelectorAll("main section").forEach(s => sio.observe(s));
+</script>
+</body>
+</html>
